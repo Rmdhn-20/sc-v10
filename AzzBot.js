@@ -2678,7 +2678,7 @@ break
 
 case 'menu': case 'help': case '?': {
 addCountCmd(`#${command.slice(1)}`, sender, _cmd)
-buffer = `https://i.postimg.cc/PxTQPVrz/null-20220821-WA0032.jpg`
+buffer = `https://i.postimg.cc/9F5Gr9XT/IMG-20220917-194227.jpg`
 anu = `Hai kak ${pushname}, have a nice day:)
    
 ♕︎ *INFO - BOT*
@@ -2915,7 +2915,7 @@ anu = `Hai kak ${pushname}, have a nice day:)
    ⚠︎ ${prefix}setppbot [image]
    ⚠︎ ${prefix}setexif
 `
-var button = [{ buttonId: `dashboard`, buttonText: { displayText: `Dashboard` }, type: 1 }, { buttonId: `https://www.instagram.com/ekuzikaa_18`, buttonText: { displayText: `Instagram` }, type: 1 }, { buttonId: `owner`, buttonText: { displayText: `Owner` }, type: 1 }]
+var button = [{ buttonId: `dashboard`, buttonText: { displayText: `Dashboard` }, type: 1 }, { buttonId: `owner`, buttonText: { displayText: `Owner` }, type: 1 }]
 zets.sendMessage(m.chat, { caption: `${anu}`, location: { jpegThumbnail: await reSize(buffer, 200, 200) }, buttons: button, footer:  botname, mentions: [m.sender] })
 }
 break
