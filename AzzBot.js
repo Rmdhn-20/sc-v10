@@ -1420,7 +1420,7 @@ case 'semoji': case 'smoji': case 'emojisticker': case 'emojistiker': {
 	await fs.unlinkSync(encmedia)
 }
 break
-	case 'ttp: {
+	case 'ttp': {
 	if (!text) throw `Example : ${prefix + command} test`
 	let encmedia = await zets.sendImageAsSticker(m.chat, `https://api-xcoders.xyz/api/maker/ttp?text=${text}&apikey=cyXNcMnw3x`, m, { packname: global.packname, author: global.author })
 	await fs.unlinkSync(encmedia)
