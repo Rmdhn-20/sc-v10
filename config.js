@@ -16,8 +16,8 @@ global.xteam = 'apivproject'
 global.lolhuman = 'yourkey'
 
 // Other
-global.owner = ['6281511480762']
-global.premium = ['6281511480762']
+global.owner = ['628889616144', '628889616144', '0', '0']
+global.premium = ['628889616144']
 global.ownername = 'ExzGanzz'
 global.botname = 'ExzBot•MD'
 global.packname = '© ExzGanzz'
@@ -26,7 +26,7 @@ global.linkig = 'https://www.instagram.com/ekuzikaa_18'
 global.linkgc = 'Gada Cok!'
 global.limitawal = '10'
 global.author = '\n\n\n\n\n\n\n\n\n\n\nExzBot•MD'
-global.sessionName = 'sessionya'
+global.sessionName = 'sesi'
 global.prefa = ['','!','.','🐦','🐤','🗿']
 global.sp = '⌕'
 global.mess = {
