@@ -1416,13 +1416,16 @@ case 'emojimix': {
 	break
 case 'semoji': case 'smoji': case 'emojisticker': case 'emojistiker': {
 	if (!text) throw `Example : ${prefix + command} 😅`
-	let emojinye = `https://api-xcoders.xyz/api/maker/emojipedia?emoji=${encodeURIComponent(text)}&apikey=cyXNcMnw3x`
-	for (let ress of emojinye.result.sticker[4]) {
-	let encmedia = await zets.sendImageAsSticker(m.chat, ress.WhatsApp, m, { packname: global.packname, author: global.author, categoties: ress.type })
+	let encmedia = await zets.sendImageAsSticker(m.chat, `http://docs-jojo.herokuapp.com/api/emoji2png?emoji=${encodeURIComponent(text)}&type=Whatsapp}`, m, { packname: global.packname, author: global.author })
 	await fs.unlinkSync(encmedia)
-	}
 }
 break
+	case 'ttp: {
+	if (!text) throw `Example : ${prefix + command} test`
+	let encmedia = await zets.sendImageAsSticker(m.chat, `https://api-xcoders.xyz/api/maker/ttp?text=${text}&apikey=cyXNcMnw3x`, m, { packname: global.packname, author: global.author })
+	await fs.unlinkSync(encmedia)
+	}
+	break
 case 'toimage': case 'toimg': {
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
