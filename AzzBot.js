@@ -1812,16 +1812,7 @@ break
 		let stikernyee = await fetchJson(`http://docs-jojo.herokuapp.com/api/getsticker?q=${text}`)
 		let jsonnye = stikernyee.result.sticker
 		let resultnye = jsonnye[Math.floor(Math.random() * jsonnye.length)]
-		let buttons = [
-			{buttonId: `stickersearch`, buttonText: {displayText: 'Next'}, type: 1}
-			]
-		let buttonMessage = {
-			sticker: { url : resultnye },
-			footer: 'Press The Button Below',
-			buttons: buttons,
-			headerType: 2
-		}
-		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		zets.senImageAsSticker(m.chat, resultnye, m, { packname: global.packname, author: global.author })
 		}
 		break
 	/*case 'motivasi': case 'dilanquote': case 'bucinquote': case 'katasenja': case 'puisi': {
