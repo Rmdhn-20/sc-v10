@@ -1839,7 +1839,7 @@ headerType: 2
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break*/
-	case 'motivasi': 
+	case 'motivasi': {
 		let motivnye = await fetchJson(`http://docs-jojo.herokuapp.com/api/randomquotes`)
 		let buttons = [
 			{ buttonId: `motivasi`, buttonText: {displayText: 'Next'}, type: 1 }
