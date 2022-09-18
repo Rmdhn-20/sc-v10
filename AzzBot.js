@@ -1791,7 +1791,7 @@ let buttons = [
 {buttonId: `motivasi`, buttonText: {displayText: 'Next'}, type: 1}
 ]
 let buttonMessage = {
-text: anu.result.message,
+text: `${anu.result.message}\n\n\nBy ${global.botname}`,
 footer: 'Press The Button Below',
 buttons: buttons,
 headerType: 2
@@ -1799,7 +1799,12 @@ headerType: 2
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
-
+	case 'readmore': case 'rmwa': case 'rm': {
+		if (!text) throw `Example : ${prefix + command} text|text`
+		let readd = args.split('|')[0]
+		let moree = args.split('|')[1]
+		let capss = `${readd}${moree}`
+		m.reply(capss)
 //────────────────────[ TEXT PROO ]────────────────────
 
 case 'neon': case 'snowtext': case 'cloudtext': case '3dluxury': case '3dgradient': case 'blackpink': case 'realisticvintage': case 'realisticloud': case 'cloudsky': case 'sandsummerbeach': case 'sandwriting': case 'sandengraved': case 'ballontext': case '3dglue': case 'space3d': case 'metaldarkgold': case 'glitch': case 'neongalaxy': case '1917text': case 'minion3d': case 'holographic3d': case 'metalpurple': case 'duluxesilver': case 'bluemetal': case 'duluxegold': case 'glossycarbon': case 'febric': case 'stone': case 'pornhub': case '3davengers': case 'marvelstudios': case 'marvel': case 'happynewyear': case 'newyear3d': case 'neontext': case 'darkgoldeffect': case 'hollowenfire': case 'bloodtext': case 'xmas3d': case '3dmetalsilver': case '3drosegold': case '3dmetalgold': case '3dmetalgalaxy': case 'lionlogo': case 'wolflogoblack': case 'wolflogogalaxy': case 'ninjalogo': case 'jokerlogo': case 'wicker': case 'naturalleaves': case 'fireworksparkle': case 'skeleton': case 'redfoilballon': case 'purplefoilballon': case 'pinkfoilballon': case 'greenfoilballon': case 'cyanfoilballon': case 'bluefoilballon': case 'goldfoilballon': case 'steel': case 'ultragloss': case 'denim': case 'decorategreen': case 'decoratepurple': case 'peridotstone': case 'rock': case 'lava': case 'yellowglass': case 'purpleglass': case 'orangeglass': case 'greenglass': case 'blueglass': case 'redglass': case 'purpleshinyglass': case 'captainamerica': case 'robotr2d2': case 'toxic': case 'rainbowequalizier': case 'pinksparklingjewelry': {
@@ -2843,6 +2848,7 @@ anu = `Hai kak ${pushname}, have a nice day:)
 
 ♕︎ *Convert*
    ⚠︎ ${prefix}toimage
+   ⚠︎ ${prefix}ttp
    ⚠︎ ${prefix}removebg
    ⚠︎ ${prefix}emojisticker
    ⚠︎ ${prefix}sticker
