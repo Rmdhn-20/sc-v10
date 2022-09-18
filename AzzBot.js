@@ -1787,11 +1787,12 @@ zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 break
 	case 'motivasi': case 'dilanquote': case 'bucinquote': case 'katasenja': case 'puisi': {
 let anu = await fetchJson(api('zenz', '/api/'+command, {}, 'apikey'))
+let res = anu.result
 let buttons = [
 {buttonId: `motivasi`, buttonText: {displayText: 'Next'}, type: 1}
 ]
 let buttonMessage = {
-text: `${anu.result.message}\n\n\nBy ${global.botname}`,
+text: `${res.message}\n\n\nBy ${global.botname}`,
 footer: 'Press The Button Below',
 buttons: buttons,
 headerType: 2
