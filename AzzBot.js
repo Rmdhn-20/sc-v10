@@ -652,25 +652,25 @@ delete this.suit[id]
 }
 break
 	case 'donasi': case 'sewabot': case 'sewa': case 'buypremium': case 'donate': {
-zets.sendMessage(m.chat, { image: { url: 'https://i.postimg.cc/7ZWmBrMB/IMG-20220819-WA0027.jpg' }, caption: `*Hai Kak ${m.pushName}*\n\n Bot Rental Prices\n⌕ 15k Per Group via E-Walet 1 Month\n⌕ 20k via pulsa 1 Month\n\n Premium Price Bot\n⌕ 10k per User 1 bulan\n\nPayment can be via Paypal/link aja/pulsa\n\nFor more details, you can chat with the owner\nhttps://wa.me/6281252848955 (Owner)\n\nDonate For Me : \n\n⌕ Paypal : https://www.paypal.me/Rifando35\n⌕ Saweria : https://saweria.co/Nando35` }, { quoted: m })
+zets.sendMessage(m.chat, { image: { url: 'https://i.postimg.cc/7ZWmBrMB/IMG-20220819-WA0027.jpg' }, caption: `*Hai Kak ${m.pushName}*\n\n Bot Rental Prices\n⌕ 15k Per Group via E-Walet 1 Month\n⌕ 20k via pulsa 1 Month\n\n Premium Price Bot\n⌕ 10k per User 1 bulan\n\nPayment can be via Dana/Gopay/pulsa\n\nFor more details, you can chat with the owner\nhttps://wa.me/628889616144 (Owner)\n\nDonate For Me : \n\n⌕ Dana/Gopay : 0888-9616-144\n⌕ Paypal : https://paypal.me/Ekuzika\n⌕ Saweria : https://saweria.co/Ekuzika` }, { quoted: m })
 }
 break
 case 'sc':  case 'sourcecode': {
 addCountCmd(`#${command.slice(1)}`, sender, _cmd)
 	anu = `
-⌕ Script : https://github.com/AzzBott679
+⌕ Script : https://github.com/Rmdhn-20
 
 Jangan lupa kasih bintang.
-⌕ Donate : 081511480762 (Dana / gopay)
-⌕ Saweria : Kaga ada
-⌕ Paypal : kaga ada
+⌕ Donate : 08889616144 (Dana / gopay)
+⌕ Saweria : saweria.co/Ekuzikaa
+⌕ Pulsa : 081310665285
 
 Dont Forget Donate
 `
 	let btn = [{
 urlButton: {
 displayText: 'Instagram',
-url: 'https://instagram.com/naando.jpeg'
+url: 'https://instagram.com/ekuzikaa_18'
 }
 }]
 zets.send5ButImg(m.chat, anu, botname, global.sc, btn)
@@ -680,15 +680,20 @@ break
 case 'tqto': case 'partner': case 'credits': {
 	anu = `Terima kasih
 
-Yahya Ganzz
+Dika Ardnt (Dev)
+⌕ https://github.com/DikaArdnt
+
+Yahya Ganzz (Dev)
 ⌕ https://github.com/AzzBott679
-⌕ https://youtube.com/channel/UCmUhiytK9WMYaOFgdOho_2g
+
+Ekuzika (Own)
+⌕ https://github.com/Rmdhn-20
 
 `
 	let btn = [{
 urlButton: {
 displayText: 'Instagram',
-url: 'https://instagram.com'
+url: 'https://instagram.com/ekuzikaa_18'
 }
 }]
 zets.send5ButImg(m.chat, anu, botname, global.tq, btn)
@@ -998,7 +1003,7 @@ teks += `⌕ @${mem.id.split('@')[0]}\n`
 zets.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
 }
 break
-case 'hidetag': {
+	case 'hidetag': case 'h': {
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
@@ -1415,12 +1420,16 @@ case 'emojimix': {
 	}
 	break
 case 'semoji': case 'smoji': case 'emojisticker': case 'emojistiker': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 	if (!text) throw `Example : ${prefix + command} 😅`
 	let encmedia = await zets.sendImageAsSticker(m.chat, `http://docs-jojo.herokuapp.com/api/emoji2png?emoji=${encodeURIComponent(text)}&type=Whatsapp}`, m, { packname: global.packname, author: global.author })
 	await fs.unlinkSync(encmedia)
 }
 break
 	case 'ttp': {
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 	if (!text) throw `Example : ${prefix + command} test`
 	let encmedia = await zets.sendImageAsSticker(m.chat, `https://api-xcoders.xyz/api/maker/ttp?text=${text}&apikey=cyXNcMnw3x`, m, { packname: global.packname, author: global.author })
 	await fs.unlinkSync(encmedia)
@@ -1611,6 +1620,8 @@ for (let i = 0; i < jumlah; i ++) {
 m.reply(teks)
 break
 	    case 'play': case 'ytplay': {
+		    if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
                 let search = await yts(text)
@@ -1640,6 +1651,8 @@ break
             }
             break
 	case 'ytmp3': case 'ytaudio': {
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 	addCountCmd(`#${command.slice(1)}`, sender, _cmd)
 let { yta } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
@@ -1651,6 +1664,8 @@ zets.sendMessage(m.chat, { document: await getBuffer(media.dl_link), mimetype: '
 }
 break
 case 'ytmp4': case 'ytvideo': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 addCountCmd(`#${command.slice(1)}`, sender, _cmd)
 let { ytv } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
@@ -1661,6 +1676,8 @@ zets.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4',
 }
 break
 	case 'getmusic': {
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 let { yta } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} 1`
 if (!m.quoted) return m.reply('Reply Pesan')
@@ -1675,6 +1692,8 @@ zets.sendMessage(m.chat, { document: await getBuffer(media.dl_link), mimetype: '
 }
 break
 case 'getvideo': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 let { ytv } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} 1`
 if (!m.quoted) return m.reply('Reply Pesan')
@@ -1707,6 +1726,8 @@ zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
 case 'anime': case 'waifu': case 'husbu': case 'neko': case 'shinobu': case 'megumin': case 'waifus': case 'nekos': case 'trap': case 'blowjob': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 m.reply(mess.wait)
 zets.sendMessage(m.chat, { image: { url: api('zenz', '/api/random/'+command, {}, 'apikey') }, caption: 'Generate Random ' + command }, { quoted: m })
 }
@@ -1785,7 +1806,25 @@ headerType: 2
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
-	case 'motivasi': case 'dilanquote': case 'bucinquote': case 'katasenja': case 'puisi': {
+	case 'stickersearch': case 'stikersearch': case 'sticksearch': case 'stiksearch': case 'getsticker': case 'getstiker': case 'getstick': case 'getstik': {
+		if (!text) throw `Example : ${prefix + command} patrick`
+		m.reply(mess.wait)
+		let stikernyee = await fetchJson(`http://docs-jojo.herokuapp.com/api/getsticker?q=${text}`)
+		let jsonnye = stikernye.result.sticker
+		let resultnye = jsonnye[Math.floor(Math.random() * jsonnye.length)]
+		let buttons = [
+			{buttonId: `stickersearch`, buttonText: {displayText: 'Next'}, type: 1}
+			]
+		let buttonMessage = {
+			sticker: { url : resultnye },
+			footer: 'Press The Button Below',
+			buttons: buttons,
+			headerType: 2
+		}
+		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
+	/*case 'motivasi': case 'dilanquote': case 'bucinquote': case 'katasenja': case 'puisi': {
 let anu = await fetchJson(api('zenz', '/api/'+command, {}, 'apikey'))
 let res = anu.result
 let buttons = [
@@ -1799,7 +1838,85 @@ headerType: 2
 }
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
-break
+break*/
+	case 'motivasi': 
+		let motivnye = await fetchJson(`http://docs-jojo.herokuapp.com/api/randomquotes`)
+		let buttons = [
+			{ buttonId: `motivasi`, buttonText: {displayText: 'Next'}, type: 1 }
+		]
+		let buttonMessage = {
+		text: `${motivnye.quotes}\n\nBy ${motivnye.author}`,
+		footer: `${global.botname}`,
+		buttons: buttons,
+		headerType: 2
+		}
+		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
+	case 'katabucin': case 'bucin': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
+		let bucinnye = await fetchJson(`https://leyscoders-api.herokuapp.com/api/katabucin?apikey=dappakntlll`)
+		let buttons = [
+			{ buttonId: `katabucin`, buttonText: {displayText: 'Next'}, type: 1 }
+		]
+		let buttonMessage = {
+		text: `${bucinnye.result}\n\nBy ${global.botname}`,
+		footer: 'Press The Button Below',
+		buttons: buttons,
+		headerType: 2
+		}
+		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
+	case 'katailham': case 'ilham': {
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
+		let ilhamnye = await fetchJson(`https://leyscoders-api.herokuapp.com/api/katailham?apikey=dappakntlll`)
+		let buttons = [
+			{ buttonId: `katailham`, buttonText: {displayText: 'Next'}, type: 1 }
+		]
+		let buttonMessage = {
+		text: `${ilhamnye.result}\n\nBy ${global.botname}`,
+		footer: 'Press The Button Below',
+		buttons: buttons,
+		headerType: 2
+		}
+		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
+	case 'pantun': {
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
+		let pantunnye = await fetchJson(`https://leyscoders-api.herokuapp.com/api/pantun-pakboy?apikey=dappakntlll`)
+		let buttons = [
+			{ buttonId: `pantun`, buttonText: {displayText: 'Next'}, type: 1 }
+		]
+		let buttonMessage = {
+		text: `${pantunnye.result}\n\nBy ${global.botname}`,
+		footer: 'Press The Button Below',
+		buttons: buttons,
+		headerType: 2
+		}
+		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
+	case 'katabijak': case 'bijak': {
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
+		let bijinye = await fetchJson(`https://api.zekais.com/bijak?apikey=lbLbxbVw`)
+		let buttons = [
+			{ buttonId: `katabijak`, buttonText: {displayText: 'Next'}, type: 1 }
+		]
+		let buttonMessage = {
+		text: `${bijinye.result}\n\nBy ${global.botname}`,
+		footer: 'Press The Button Below',
+		buttons: buttons,
+		headerType: 2
+		}
+		zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+		}
+		break
 	case 'readmore': case 'rmwa': case 'rm':
 		if (!text) throw `Example : ${prefix + command} text|text`
 		let [readd, moree] = text.split`|`
@@ -1809,7 +1926,9 @@ break
 //────────────────────[ TEXT PROO ]────────────────────
 
 case 'neon': case 'snowtext': case 'cloudtext': case '3dluxury': case '3dgradient': case 'blackpink': case 'realisticvintage': case 'realisticloud': case 'cloudsky': case 'sandsummerbeach': case 'sandwriting': case 'sandengraved': case 'ballontext': case '3dglue': case 'space3d': case 'metaldarkgold': case 'glitch': case 'neongalaxy': case '1917text': case 'minion3d': case 'holographic3d': case 'metalpurple': case 'duluxesilver': case 'bluemetal': case 'duluxegold': case 'glossycarbon': case 'febric': case 'stone': case 'pornhub': case '3davengers': case 'marvelstudios': case 'marvel': case 'happynewyear': case 'newyear3d': case 'neontext': case 'darkgoldeffect': case 'hollowenfire': case 'bloodtext': case 'xmas3d': case '3dmetalsilver': case '3drosegold': case '3dmetalgold': case '3dmetalgalaxy': case 'lionlogo': case 'wolflogoblack': case 'wolflogogalaxy': case 'ninjalogo': case 'jokerlogo': case 'wicker': case 'naturalleaves': case 'fireworksparkle': case 'skeleton': case 'redfoilballon': case 'purplefoilballon': case 'pinkfoilballon': case 'greenfoilballon': case 'cyanfoilballon': case 'bluefoilballon': case 'goldfoilballon': case 'steel': case 'ultragloss': case 'denim': case 'decorategreen': case 'decoratepurple': case 'peridotstone': case 'rock': case 'lava': case 'yellowglass': case 'purpleglass': case 'orangeglass': case 'greenglass': case 'blueglass': case 'redglass': case 'purpleshinyglass': case 'captainamerica': case 'robotr2d2': case 'toxic': case 'rainbowequalizier': case 'pinksparklingjewelry': {
-if (!text) throw `Example : ${prefix + command} text`
+if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
+	if (!text) throw `Example : ${prefix + command} text`
 m.reply(mess.wait)
 anu = await getBuffer(`https://xteam.xyz/textpro/${command}?text=${text}&APIKEY=${global.xteam}`)
 zets.sendMessage(m.chat, { image: anu, caption: `Text Pro ${command}` }, { quoted: m}).catch((err) => m.reply('Maaf server Xteam sedang down'))
@@ -2151,6 +2270,8 @@ footer: "Untuk Mengubah Ke Audio Gunakan Manual #tiktokaudio [link]"
 break
 
 case 'ttnowm':
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 if (!text) throw 'Masukkan Query Link!'
 m.reply(mess.wait)
 hx.ttdownloader(q).then( data => {
@@ -2159,6 +2280,8 @@ zets.sendMessage(m.chat, { video: { url: data.nowm }, mimetype: 'video/mp4' }, {
 	break
 
 case 'ttaudio':
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 if (!text) throw 'Masukkan Query Link!'
 m.reply(mess.wait)
 hx.ttdownloader(q).then( data => {
@@ -2167,6 +2290,8 @@ zets.sendMessage(m.chat, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, {
 	break
 
 case 'ig': case 'igdl': case 'instagram': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 if (!text) throw 'Masukkan Query Link!'
 if (!isUrl(args[0]) && !args[0].includes('instagram.com')) throw 'Link yang kamu berikan tidak valid'
 m.reply(mess.wait)
@@ -2187,6 +2312,8 @@ let link = await getBuffer(i.url)
 			break
 
 case 'igs': case 'igstory': case 'instagramstory': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 if (!text) throw 'Masukkan Username!'
 m.reply(mess.wait)
 	hx.igstory(text)
@@ -2214,6 +2341,8 @@ zets.sendMessage(m.chat, { audio: { url: anu.result.audio[0].link }, mimetype: '
 break*/
 
 case 'fbdl': case 'fb': case 'facebook': {
+	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.data.users[m.sender].limit -= 1 // -1 limit
 if (!text) throw 'Masukkan Query Link!'
 if (!isUrl(args[0]) && !args[0].includes('facebook.com')) throw 'Link yang kamu berikan tidak.valid'
 m.reply(mess.wait)
@@ -2694,7 +2823,8 @@ anu = `Hai kak ${pushname}, have a nice day:)
 ✔︎ *Bot Name:* _${global.botname}_
 ✔︎ *Owner Name:* _${global.ownername}_
 ✔︎ *Runtime:* _${runtime(process.uptime())}_
-✔︎ *IG Owner:* _${global.linkig}_
+✔︎ *IG Owner:* ${global.linkig}
+✔︎ *WhatsApp:* wa.me/${global.owner}
 ✔︎ *Tanggal:* _${moment.tz('Asia/Jakarta').format('DD/MM/YY')}_
 ✔︎ *Waktu:* _${moment.tz('Asia/Jakarta').format('HH:mm:ss')}_ 
 ✔︎ *Library:* _Baileys-Md_
@@ -2747,15 +2877,16 @@ anu = `Hai kak ${pushname}, have a nice day:)
    ⚠︎ ${prefix}wikimedia [query]
    ⚠︎ ${prefix}ytsearch [query]
    ⚠︎ ${prefix}ringtone [query]
+   ⚠︎ ${prefix}stickersearch [query]
 
 ♕︎ *Random*
    ⚠︎ ${prefix}coffe
    ⚠︎ ${prefix}quotesanime
    ⚠︎ ${prefix}motivasi
-   ⚠︎ ${prefix}dilanquote
-   ⚠︎ ${prefix}bucinquote
-   ⚠︎ ${prefix}katasenja
-   ⚠︎ ${prefix}puisi
+   ⚠︎ ${prefix}katabucin
+   ⚠︎ ${prefix}katailham
+   ⚠︎ ${prefix}pantun
+   ⚠︎ ${prefix}katabjak
    ⚠︎ ${prefix}couple
    ⚠︎ ${prefix}anime
    ⚠︎ ${prefix}waifu
@@ -2926,7 +3057,7 @@ anu = `Hai kak ${pushname}, have a nice day:)
    ⚠︎ ${prefix}setppbot [image]
    ⚠︎ ${prefix}setexif
 `
-var button = [{ buttonId: `dashboard`, buttonText: { displayText: `Dashboard` }, type: 1 }, { buttonId: `owner`, buttonText: { displayText: `Owner` }, type: 1 }]
+var button = [{ buttonId: `dashboard`, buttonText: { displayText: `Dashboard` }, type: 1 }, { buttonId: `ping`, buttonText: { displayText: `Bot Status` }, type: 1 }, { buttonId: `owner`, buttonText: { displayText: `Owner` }, type: 1 }]
 zets.sendMessage(m.chat, { caption: `${anu}`, location: { jpegThumbnail: await reSize(buffer, 200, 200) }, buttons: button, footer:  botname, mentions: [m.sender] })
 }
 break
