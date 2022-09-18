@@ -2824,7 +2824,7 @@ anu = `Hai kak ${pushname}, have a nice day:)
 ✔︎ *Owner Name:* _${global.ownername}_
 ✔︎ *Runtime:* _${runtime(process.uptime())}_
 ✔︎ *IG Owner:* ${global.linkig}
-✔︎ *WhatsApp:* wa.me/${global.owner}
+✔︎ *WhatsApp:* wa.me/${global.wa}
 ✔︎ *Tanggal:* _${moment.tz('Asia/Jakarta').format('DD/MM/YY')}_
 ✔︎ *Waktu:* _${moment.tz('Asia/Jakarta').format('HH:mm:ss')}_ 
 ✔︎ *Library:* _Baileys-Md_
