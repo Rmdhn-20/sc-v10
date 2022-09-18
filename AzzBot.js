@@ -1810,7 +1810,7 @@ break
 		if (!text) throw `Example : ${prefix + command} patrick`
 		m.reply(mess.wait)
 		let stikernyee = await fetchJson(`http://docs-jojo.herokuapp.com/api/getsticker?q=${text}`)
-		let jsonnye = stikernye.result.sticker
+		let jsonnye = stikernyee.result.sticker
 		let resultnye = jsonnye[Math.floor(Math.random() * jsonnye.length)]
 		let buttons = [
 			{buttonId: `stickersearch`, buttonText: {displayText: 'Next'}, type: 1}
