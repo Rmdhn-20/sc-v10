@@ -1608,7 +1608,7 @@ var total = 0
 for (let o of _cmd) {
   total = total + o.count
 }
-var teks = `♥ *EXZ BOT DASHBOARD* ♥\n\n♥ *HIT* ♥\n• GLOBAL : ${total}\n• USER : ${totalUser}\n\n`
+var teks = `❑  *EXZ BOT DASHBOARD*  ❑\n\n *HIT* \n• GLOBAL : ${total}\n• USER : ${totalUser}\n\n`
 teks += `*Most Command Global*\n`
 for (let u = 0; u < jumlahCmd; u ++) {
   teks += `• ${_cmd[u].nama} : ${_cmd[u].count}\n`
@@ -2603,6 +2603,33 @@ case 'delmsg': case 'deletemsg': {
 	break
 
 //────────────────────[ ANONYMOUS CHAT ]────────────────────
+
+case 'menfess':
+if (!text) throw `Example : ${prefix + command} 628xxx|nama_kamu|pesannya`
+let [nomor, namalu, pesannye] = text.split`|`
+let isinye = `📌 Hai kak 👋 ada menfess nih buat kamu
+
+Dari : *${namalu}*
+Pesan : ${pesannye}
+
+_Pesan ini di tulis oleh seseorang, bot hanya menyampaikan saja_`
+let replynye = `Menfess sukses terkirim 🫂
+
+Tapi dia belum bisa ngebales ya bre hehe..`
+let buttons = [
+	{buttonId: `maaf`, buttonText: {displayText: 'Maaf Ya 🙏'}, type: 1}
+	]
+	let buttonMessage = {
+	image: { url: `https://telegra.ph/file/d8e7eff89894b49472a46.jpg` },
+	caption: `${isinye}`,
+	footer: `🙏 Maaf kamu belum bisa membalas ke pengirim pesan ini 🙏`,
+	buttons: buttons,
+	headerType: 4
+	}
+	zets.sendMessage(nomor + '@s.whatsapp.net', buttonMessage, { quoted: m })
+	await sleep(2000)
+	m.reply(replynye)
+	break
 
 	case 'anonymous': {
 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
