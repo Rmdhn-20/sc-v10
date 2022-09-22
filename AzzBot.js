@@ -1743,7 +1743,7 @@ headerType: 4
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
-case 'meme': case 'memes':
+case 'meme': case 'memes': {
 let buttons = [
 {buttonId: `coffe`, buttonText: {displayText: 'Next Image'}, type: 1}
 ]
@@ -1755,8 +1755,9 @@ buttons: buttons,
 headerType: 4
 }
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+}
 break
-case 'darkjoke': case 'darkjokes':
+case 'darkjoke': case 'darkjokes': {
 let buttons = [
 {buttonId: `darkjoke`, buttonText: {displayText: 'Next Image'}, type: 1}
 ]
@@ -1768,6 +1769,7 @@ buttons: buttons,
 headerType: 4
 }
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+}
 break
 case 'wallpaper': {
 if (!text) throw 'Masukkan Query Title'
