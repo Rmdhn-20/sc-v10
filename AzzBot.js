@@ -1,5 +1,6 @@
 /**
    * Create By Yahyaganzz
+   * Recode By Ekuzika
 */
 
 require('./config')
@@ -21,6 +22,8 @@ const speed = require('performance-now')
 const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
+const { TTScraper } = require('tiktok-scraper-ts')
+const stalkuy = new TTScraper()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 
 //Apikey
@@ -60,6 +63,7 @@ const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '')
 const itsMe = m.sender == botNumber ? true : false
 const text = q = args.join(" ")
 const sender = m.sender
+const bio = await zets.getStatus(sender)
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 	const isMedia = /image|video|sticker|audio/.test(mime)
@@ -1517,31 +1521,16 @@ m.reply(util.format(anu))
 await fs.unlinkSync(media)
 }
 break
-case 'imagenobg': case 'removebg': case 'remove-bg': {
+case 'imagenobg': case 'removebg': case 'remove-bg': case 'rmbg': case 'imgnobg': {
 	if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	let remobg = require('remove.bg')
-	let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
-	let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
-	hmm = await './src/remobg-'+getRandom('')
-	localFile = await zets.downloadAndSaveMediaMessage(quoted, hmm)
-	outputFile = await './src/hremo-'+getRandom('.png')
-	m.reply(mess.wait)
-	remobg.removeBackgroundFromImageFile({
-	  path: localFile,
-	  apiKey: apinobg,
-	  size: "regular",
-	  type: "auto",
-	  scale: "100%",
-	  outputFile 
-	}).then(async result => {
-	zets.sendMessage(m.chat, {image: fs.readFileSync(outputFile), caption: mess.success}, { quoted : m })
-	await fs.unlinkSync(localFile)
-	await fs.unlinkSync(outputFile)
-	})
-	}
-	break
+	let media = await zets.downloadAndSaveMediaMessage(quoted)
+	let { TelegraPh } = require('./lib/uploader')
+	let anu = await TelegraPh(media)
+	zets.sendMessage(m.chat, { image: { url: `https://api-xcoders.xyz/api/maker/rmbg?url=${util.format(anu)}&apikey=cyXNcMnw3x` }, caption: mess.success }, { quoted: m })
+}
+break
 case 'yts': case 'ytsearch': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
@@ -1754,6 +1743,32 @@ headerType: 4
 zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
+case 'meme': case 'memes':
+let buttons = [
+{buttonId: `coffe`, buttonText: {displayText: 'Next Image'}, type: 1}
+]
+let buttonMessage = {
+image: { url: 'https://leyscoders-api.herokuapp.com/api/memeindo?apikey=dappakntlll' },
+caption: `Random Meme`,
+footer: global.botname,
+buttons: buttons,
+headerType: 4
+}
+zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+break
+case 'darkjoke': case 'darkjokes':
+let buttons = [
+{buttonId: `darkjoke`, buttonText: {displayText: 'Next Image'}, type: 1}
+]
+let buttonMessage = {
+image: { url: 'https://leyscoders-api.herokuapp.com/api/darkjoke?apikey=dappakntlll' },
+caption: `Dark wkwk`,
+footer: global.botname,
+buttons: buttons,
+headerType: 4
+}
+zets.sendMessage(m.chat, buttonMessage, { quoted: m })
+break
 case 'wallpaper': {
 if (!text) throw 'Masukkan Query Title'
 		let { wallpaper } = require('./lib/scraper')
@@ -1836,7 +1851,7 @@ break*/
 			{ buttonId: `motivasi`, buttonText: {displayText: 'Next'}, type: 1 }
 		]
 		let buttonMessage = {
-		text: `${motivnye.quotes}\n\nBy ${motivnye.author}`,
+		text: `${motivnye.quotes}\n\n- ${motivnye.author}`,
 		footer: `${global.botname}`,
 		buttons: buttons,
 		headerType: 2
@@ -1868,8 +1883,8 @@ break*/
 			{ buttonId: `katailham`, buttonText: {displayText: 'Next'}, type: 1 }
 		]
 		let buttonMessage = {
-		text: `${ilhamnye.result}\n\nBy ${global.botname}`,
-		footer: 'Press The Button Below',
+		text: `${ilhamnye.result}`,
+		footer: global.botname,
 		buttons: buttons,
 		headerType: 2
 		}
@@ -2191,58 +2206,48 @@ if (anu.status == false) return m.reply(anu.message)
 zets.sendText(m.chat, `⌕ *Hasil :* ${anu.message}`, m)
 }
 break
-	/*case 'stalker': case 'stalk': {
+//────────────────────[ STALKER ]──────────────────── 
+	
+	case 'stalker': case 'stalk': {
 		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply('Limit Harian Anda Telah Habis')
-if (!text) return m.reply(`Example : ${prefix +command} type id\n\nList Type :\n1. ff (Free Fire)\n2. ml (Mobile Legends)\n3. aov (Arena Of Valor)\n4. cod (Call Of Duty)\n5. pb (point Blank)\n6. ig (Instagram)\n7. npm (https://npmjs.com)`)
+if (!text) return m.reply(`Example : ${prefix +command} type username\n\nList Type :\n1. ig (Instagram)\n2. github (username)\n3. tiktok (username)\n4. twitter (username)`)
 let [type, id, zone] = args
-if (type.toLowerCase() == 'ff') {
-if (!id) throw `No Query id, Example ${prefix + command} ff 552992060`
-let anu = await fetchJson(api('zenz', '/api/nickff', { apikey: global.APIKeys[global.APIs['zenz']], query: id }))
-if (anu.status == false) return m.reply(anu.result.message)
-m.reply(`ID : ${anu.result.gameId}\nUsername : ${anu.result.userName}`)
-		db.data.users[m.sender].limit -= 1
-} else if (type.toLowerCase() == 'ml') {
-if (!id) throw `No Query id, Example : ${prefix + command} ml 214885010 2253`
-if (!zone) throw `No Query id, Example : ${prefix + command} ml 214885010 2253`
-let anu = await fetchJson(api('zenz', '/api/nickml', { apikey: global.APIKeys[global.APIs['zenz']], query: id, query2: zone }))
-if (anu.status == false) return m.reply(anu.result.message)
-m.reply(`ID : ${anu.result.gameId}\nZone : ${anu.result.zoneId}\nUsername : ${anu.result.userName}`)
-		db.data.users[m.sender].limit -= 1
-} else if (type.toLowerCase() == 'aov') {
-if (!id) throw `No Query id, Example ${prefix + command} aov 293306941441181`
-let anu = await fetchJson(api('zenz', '/api/nickaov', { apikey: global.APIKeys[global.APIs['zenz']], query: id }))
-if (anu.status == false) return m.reply(anu.result.message)
-m.reply(`ID : ${anu.result.gameId}\nUsername : ${anu.result.userName}`)
-		db.data.users[m.sender].limit -= 1
-} else if (type.toLowerCase() == 'cod') {
-if (!id) throw `No Query id, Example ${prefix + command} cod 6290150021186841472`
-let anu = await fetchJson(api('zenz', '/api/nickcod', { apikey: global.APIKeys[global.APIs['zenz']], query: id }))
-if (anu.status == false) return m.reply(anu.result.message)
-m.reply(`ID : ${anu.result.gameId}\nUsername : ${anu.result.userName}`)
-		db.data.users[m.sender].limit -= 1
-} else if (type.toLowerCase() == 'pb') {
-if (!id) throw `No Query id, Example ${prefix + command} pb riio46`
-let anu = await fetchJson(api('zenz', '/api/nickpb', { apikey: global.APIKeys[global.APIs['zenz']], query: id }))
-if (anu.status == false) return m.reply(anu.result.message)
-m.reply(`ID : ${anu.result.gameId}\nUsername : ${anu.result.userName}`)
-		db.data.users[m.sender].limit -= 1
-} else if (type.toLowerCase() == 'ig') {
+if (type.toLowerCase() == 'ig') {
 if (!id) throw `No Query username, Example : ${prefix + command} ig cak_haho`
-let { result: anu } = await fetchJson(api('zenz', '/api/stalker/ig', { username: id }, 'apikey'))
+let { result: anu } = await fetchJson(`https://api.xteam.xyz/dl/igstalk?nama=${id}&APIKEY=33a708cfa36fe5ba`)
 if (anu.status == false) return m.reply(anu.result.message)
-zets.sendMedia(m.chat, anu.caption.profile_hd, '', `⌕ Full Name : ${anu.caption.full_name}\n⌕ User Name : ${anu.caption.user_name}\n⌕ ID ${anu.caption.user_id}\n⌕ Followers : ${anu.caption.followers}\n⌕ Following : ${anu.caption.following}\n⌕ Bussines : ${anu.caption.bussines}\n⌕ Profesional : ${anu.caption.profesional}\n⌕ Verified : ${anu.caption.verified}\n⌕ Private : ${anu.caption.private}\n⌕ Bio : ${anu.caption.biography}\n⌕ Bio Url : ${anu.caption.bio_url}`, m)
+zets.sendMedia(m.chat, anu.profile_pic_url, '', `⌕ Full Name : ${anu.full_name}\n⌕ User Name : ${anu.username}\n⌕ ID ${anu.id}\n⌕ Followers : ${anu.edge_follow.count}\n⌕ Following : ${anu.edge_followed_by.count}\n⌕ Private : ${anu.is_private}\n⌕ Bio : ${anu.biography}`, m)
 		db.data.users[m.sender].limit -= 1
-} else if (type.toLowerCase() == 'npm') {
-if (!id) throw `No Query username, Example : ${prefix + command} npm scrape-primbon`
-let { result: anu } = await fetchJson(api('zenz', '/api/stalker/npm', { query: id }, 'apikey'))
-if (anu.status == false) return m.reply(anu.result.message)
-m.reply(`⌕ Name : ${anu.name}\n⌕ Version : ${Object.keys(anu.versions)}\n⌕ Created : ${tanggal(anu.time.created)}\n⌕ Modified : ${tanggal(anu.time.modified)}\n⌕ Maintainers :\n ${anu.maintainers.map(v => `- ${v.name} : ${v.email}`).join('\n')}\n\n⌕ Description : ${anu.description}\n⌕ Homepage : ${anu.homepage}\n⌕ Keywords : ${anu.keywords}\n⌕ Author : ${anu.author.name}\n⌕ License : ${anu.license}\n⌕ Readme : ${anu.readme}`)
+} else if (type.toLowerCase() == 'github') {
+if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20`
+let anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/github?q=${id}&apikey=dappakntlll`)
+if (anu.name == 'Error') return m.reply(anu.message)
+m.reply(`⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.user.dibuat_pada)}\n⌕ Modified : ${tanggal(anu.result.user.update_pada)}\n\n⌕ Description : ${anu.result.user.bio}\n⌕ Homepage : ${anu.result.user.link}`)
 		db.data.users[m.sender].limit -= 1
+} else if (type.toLowerCase() == 'tiktok') {
+if (!id) throw `No Query username, Example : ${prefix + command} tiktok exzuka_81`
+m.reply(mess.wait)
+stalkuy.user(q)
+.then(User => {
+	console.log(User)
+	zets.sendMedia(m.chat, User.avatar, '', `⌕ *Username:* ${User.uniqueId}\n⌕ *Nickname:* ${User.nickname}\n⌕ *Followers:* ${User.followers}\n⌕ *Following:* ${User.following}\n⌕ *Verified:* ${User.verified}\n⌕ *Private:* ${User.privateAccount}\n⌕ *Total Likes:* ${User.hearts}\n⌕ *Total Videos:* ${User.videos}\n⌕ *Created At:* ${User.createdAt}\n⌕ *Bio:* ${User.signature}\n⌕ *Bio Url:* ${User.bioLink}`, m)
+	.catch(err => {
+	console.log(err)
+	m.reply(err.message)
+		})
+	})
+	db.data.users[m.sender].limit -= 1
+} else if (type.toLowerCase() == 'twitter') {
+if (!id) throw `No Query username, Example : ${prefix + command} twitter cnnindonesia`
+m.reply(mess.wait)
+let restapinye = await fetchJson(`https://api-xcoders.xyz/api/stalk/twitter?username=${id}&apikey=cyXNcMnw3x`)
+let resultnye = restapinye.result
+zets.sendMedia(m.chat, resultnye.profile, '', `⌕ *Username:* ${resultnye.username}\n⌕ *Fullname:* ${resultnye.nickname}\n⌕ *Biography:* ${resultnye.biography}\n⌕ *Followers:* ${resultnye.followers}\n⌕ *Following:* ${resultnye.following}\n⌕ *Created At:* ${resultnye.join_at}\n`, m)
 } else {
-m.reply(`Example : ${prefix +command} type id\n\nList Type :\n1. ff (Free Fire)\n2. ml (Mobile Legends)\n3. aov (Arena Of Valor)\n4. cod (Call Of Duty)\n5. pb (point Blank)\n6. ig (Instagram)\n7. npm (https://npmjs.com)`)
+m.reply(`Example : ${prefix +command} type username\n\nList Type :\n1. ig (Instagram)\n2. github (username)\n3. tiktok (username)\n4. twitter (username)`)
 }
 }
-break*/
+break
 
 //────────────────────[ DOWNLOADER ]────────────────────
 
@@ -2604,32 +2609,26 @@ case 'delmsg': case 'deletemsg': {
 
 //────────────────────[ ANONYMOUS CHAT ]────────────────────
 
-case 'menfess':
-if (!text) throw `Example : ${prefix + command} 628xxx|nama_kamu|pesannya`
+case 'menfess': {
+if (!text) throw `Example : ${prefix + command}menfess 628xxx|nama_kamu|pesannya`
 let [nomor, namalu, pesannye] = text.split`|`
-let isinye = `📌 Hai kak 👋 ada menfess nih buat kamu
+let imagenye = `https://telegra.ph/file/d8e7eff89894b49472a46.jpg`
+let isinye = `Hai kak 👋 ada menfess nih buat kamu
 
-Dari : *${namalu}*
+Dari : ${namalu}
 Pesan : ${pesannye}
+
 
 _Pesan ini di tulis oleh seseorang, bot hanya menyampaikan saja_`
 let replynye = `Menfess sukses terkirim 🫂
 
 Tapi dia belum bisa ngebales ya bre hehe..`
-let buttons = [
-	{buttonId: `maaf`, buttonText: {displayText: 'Maaf Ya 🙏'}, type: 1}
-	]
-	let buttonMessage = {
-	image: { url: `https://telegra.ph/file/d8e7eff89894b49472a46.jpg` },
-	caption: `${isinye}`,
-	footer: `🙏 Maaf kamu belum bisa membalas ke pengirim pesan ini 🙏`,
-	buttons: buttons,
-	headerType: 4
-	}
-	zets.sendMessage(nomor + '@s.whatsapp.net', buttonMessage, { quoted: m })
-	await sleep(2000)
-	m.reply(replynye)
-	break
+var button = [{ buttonId: `dashboard`, buttonText: { displayText: `Dashboard` }, type: 1 }, { buttonId: `owner`, buttonText: { displayText: `Owner` }, type: 1 }]
+zets.sendMessage(nomor + '@s.whatsapp.net', { caption: `${isinye}`, location: { jpegThumbnail: await reSize(imagenye, 200, 200) }, buttons: button, footer:  `Maaf kamu belum bisa membalas pesan ini ke pengirim`, mentions: [m.sender] })
+await sleep(3000)
+m.reply(replynye)
+}
+break
 
 	case 'anonymous': {
 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
@@ -2835,17 +2834,32 @@ break
 case 'menu': case 'help': case '?': {
 addCountCmd(`#${command.slice(1)}`, sender, _cmd)
 buffer = `https://i.postimg.cc/9F5Gr9XT/IMG-20220917-194227.jpg`
-anu = `Hai kak ${pushname}, have a nice day:)
+anu = `Hai kak, have a nice day:)
    
 ♕︎ *INFO - BOT*
 ✔︎ *Bot Name:* _${global.botname}_
 ✔︎ *Owner Name:* _${global.ownername}_
 ✔︎ *Runtime:* _${runtime(process.uptime())}_
 ✔︎ *IG Owner:* ${global.linkig}
-✔︎ *WhatsApp:* wa.me/${global.wa}
 ✔︎ *Tanggal:* _${moment.tz('Asia/Jakarta').format('DD/MM/YY')}_
 ✔︎ *Waktu:* _${moment.tz('Asia/Jakarta').format('HH:mm:ss')}_ 
 ✔︎ *Library:* _Baileys-Md_
+
+♕︎ *YOUR INFORMATION*
+✔︎ *Name :* _${pushname}_
+✔︎ *WhatsApp :* _wa.me/${sender}_
+✔︎ *Bio :* ${bio.status}
+
+♕︎ *Main*
+   ⚠︎ ${prefix}ping
+   ⚠︎ ${prefix}owner
+   ⚠︎ ${prefix}menu / ${prefix}help / ${prefix}?
+   ⚠︎ ${prefix}delete
+   ⚠︎ ${prefix}infochat
+   ⚠︎ ${prefix}quoted
+   ⚠︎ ${prefix}listpc
+   ⚠︎ ${prefix}listgc
+   ⚠︎ ${prefix}listonline
 
 ♕︎ *Group*
    ⚠︎ ${prefix}linkgroup
@@ -2896,15 +2910,23 @@ anu = `Hai kak ${pushname}, have a nice day:)
    ⚠︎ ${prefix}ytsearch [query]
    ⚠︎ ${prefix}ringtone [query]
    ⚠︎ ${prefix}stickersearch [query]
+   
+♕︎ *Stalking*
+   ⚠︎ ${prefix}stalk ig [username]
+   ⚠︎ ${prefix}stalk github [username]
+   ⚠︎ ${prefix}stalk tiktok [username]
+   ⚠︎ ${prefix}stalk twitter [username]
 
 ♕︎ *Random*
    ⚠︎ ${prefix}coffe
+   ⚠︎ ${prefix}meme
    ⚠︎ ${prefix}quotesanime
    ⚠︎ ${prefix}motivasi
    ⚠︎ ${prefix}katabucin
    ⚠︎ ${prefix}katailham
    ⚠︎ ${prefix}pantun
    ⚠︎ ${prefix}katabjak
+   ⚠︎ ${prefix}darkjoke
    ⚠︎ ${prefix}couple
    ⚠︎ ${prefix}anime
    ⚠︎ ${prefix}waifu
@@ -3014,18 +3036,6 @@ anu = `Hai kak ${pushname}, have a nice day:)
    ⚠︎ ${prefix}dbinary
    ⚠︎ ${prefix}styletext
 
-♕︎ *Main*
-   ⚠︎ ${prefix}ping
-   ⚠︎ ${prefix}owner
-   ⚠︎ ${prefix}menu / ${prefix}help / ${prefix}?
-   ⚠︎ ${prefix}delete
-   ⚠︎ ${prefix}infochat
-   ⚠︎ ${prefix}quoted
-   ⚠︎ ${prefix}listpc
-   ⚠︎ ${prefix}listgc
-   ⚠︎ ${prefix}listonline
-   ⚠︎ ${prefix}speedtest
-
 ♕︎ *Database*
    ⚠︎ ${prefix}setcmd
    ⚠︎ ${prefix}listcmd
@@ -3037,6 +3047,7 @@ anu = `Hai kak ${pushname}, have a nice day:)
    ⚠︎ ${prefix}delmsg
 
 ♕︎ *Anonymous Chat*
+   ⚠︎ ${prefix}menfess
    ⚠︎ ${prefix}anonymous
    ⚠︎ ${prefix}start
    ⚠︎ ${prefix}next
