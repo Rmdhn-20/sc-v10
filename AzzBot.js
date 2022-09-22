@@ -63,7 +63,6 @@ const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '')
 const itsMe = m.sender == botNumber ? true : false
 const text = q = args.join(" ")
 const sender = m.sender
-const bio = await zets.getStatus(sender)
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 	const isMedia = /image|video|sticker|audio/.test(mime)
@@ -2835,6 +2834,8 @@ break
 
 case 'menu': case 'help': case '?': {
 addCountCmd(`#${command.slice(1)}`, sender, _cmd)
+var sts = await zets.getStatus(sender)
+const bio = sts
 buffer = `https://i.postimg.cc/9F5Gr9XT/IMG-20220917-194227.jpg`
 anu = `Hai kak, have a nice day:)
    
