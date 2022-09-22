@@ -54,7 +54,7 @@
     "request": "^2.88.2",
     "remove.bg": "^1.3.0",
     "scrape-primbon": "^1.1.0",
-    "tiktok-scraper-ts": "^1.2.2",
+    "tiktok-scraper-ts": "^1.3.9",
     "util": "^0.12.4",
     "xfarr-api": "^2.0.0",
     "yargs": "^17.2.1",
