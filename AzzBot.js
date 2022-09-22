@@ -2215,9 +2215,10 @@ if (!text) return m.reply(`Example : ${prefix +command} type username\n\nList Ty
 let [type, id, zone] = args
 if (type.toLowerCase() == 'ig') {
 if (!id) throw `No Query username, Example : ${prefix + command} ig ekuzikaa_18`
-let { result: anu } = await fetchJson(`https://api-xcoders.xyz/api/stalk/ig?username=${id}&apikey=cyXNcMnw3x`)
-if (anu.status == false) return m.reply(anu.result)
-zets.sendMedia(m.chat, anu.profile_url, '', `⌕ Full Name : ${anu.fullname}\n⌕ User Name : ${anu.username}\n⌕ Followers : ${anu.followers}\n⌕ Following : ${anu.following}\n⌕ Private : ${anu.is_private}\n⌕ Bio : ${anu.biography}\n⌕ Posted : ${anu.post_count}`, m)
+let anu = await fetchJson(`https://api-xcoders.xyz/api/stalk/ig?username=${id}&apikey=cyXNcMnw3x`)
+if (anu.status == false) return m.reply(anu.status)
+m.reply(mess.wait)
+zets.sendMedia(m.chat, anu.result.profile_url, '', `⌕ Full Name : ${anu.result.fullname}\n⌕ User Name : ${anu.result.username}\n⌕ Followers : ${anu.result.followers}\n⌕ Following : ${anu.result.following}\n⌕ Private : ${anu.result.is_private}\n⌕ Bio : ${anu.result.biography}\n⌕ Posted : ${anu.result.post_count}`, m)
 		db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'github') {
 if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20`
@@ -2228,12 +2229,9 @@ m.reply(`⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.u
 } else if (type.toLowerCase() == 'tiktok') {
 if (!id) throw `No Query username, Example : ${prefix + command} tiktok exzuka_81`
 m.reply(mess.wait)
-stalkuy.user(id)
-.then(User => {
-	console.log(User)
-	zets.sendMedia(m.chat, User.avatar, '', `⌕ *Username:* ${User.uniqueId}\n⌕ *Nickname:* ${User.nickname}\n⌕ *Followers:* ${User.followers}\n⌕ *Following:* ${User.following}\n⌕ *Verified:* ${User.verified}\n⌕ *Private:* ${User.privateAccount}\n⌕ *Total Likes:* ${User.hearts}\n⌕ *Total Videos:* ${User.videos}\n⌕ *Created At:* ${User.createdAt}\n⌕ *Bio:* ${User.signature}\n⌕ *Bio Url:* ${User.bioLink}`, m)
-	})
-	db.data.users[m.sender].limit -= 1
+let anu = await stalkuy.user(id)
+zets.sendMedia(m.chat, anu.avatar, '', `⌕ *Username:* ${anu.uniqueId}\n⌕ *Nickname:* ${anu.nickname}\n⌕ *Followers:* ${anu.followers}\n⌕ *Following:* ${anu.following}\n⌕ *Verified:* ${anu.verified}\n⌕ *Private:* ${anu.privateAccount}\n⌕ *Total Likes:* ${anu.hearts}\n⌕ *Total Videos:* ${anu.videos}\n⌕ *Created At:* ${anu.createdAt}\n⌕ *Bio:* ${anu.signature}\n⌕ *Bio Url:* ${anu.bioLink}`, m)
+db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'twitter') {
 if (!id) throw `No Query username, Example : ${prefix + command} twitter cnnindonesia`
 m.reply(mess.wait)
@@ -2759,7 +2757,7 @@ break
 	if (!isCreator) throw mess.owner
 	if (!text) throw `Example : ${prefix + command} Exz-Bot`
 	const status = `${text}`
-	await zets.updateProfileName(status)
+	zets.updateProfileName(status)
 	m.reply(mess.success)
 }
 	break
