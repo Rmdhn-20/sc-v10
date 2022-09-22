@@ -2758,6 +2758,14 @@ zets.public = false
 m.reply('Sukses Change To Self Usage')
 }
 break
+	case 'setnamebot': {
+	if (!isCreator) throw mess.owner
+	if (!text) throw `Example : ${prefix + command} Exz-Bot`
+	const status = `${text}`
+	await zets.updateProfileName(status)
+	m.reply(mess.success)
+}
+	break
 
 //────────────────────[ INFO BOT ]────────────────────
 
@@ -2834,7 +2842,7 @@ break
 
 case 'menu': case 'help': case '?': {
 addCountCmd(`#${command.slice(1)}`, sender, _cmd)
-var sts = await zets.getStatus(sender)
+var sts = await zets.fetchStatus(sender)
 const bio = sts
 buffer = `https://i.postimg.cc/9F5Gr9XT/IMG-20220917-194227.jpg`
 anu = `Hai kak, have a nice day:)
@@ -3088,6 +3096,7 @@ anu = `Hai kak, have a nice day:)
    ⚠︎ ${prefix}bcall [text]
    ⚠︎ ${prefix}setppbot [image]
    ⚠︎ ${prefix}setexif
+   ⚠︎ ${prefix}setnamebot
 `
 var button = [{ buttonId: `dashboard`, buttonText: { displayText: `Dashboard` }, type: 1 }, { buttonId: `ping`, buttonText: { displayText: `Bot Status` }, type: 1 }, { buttonId: `owner`, buttonText: { displayText: `Owner` }, type: 1 }]
 zets.sendMessage(m.chat, { caption: `${anu}`, location: { jpegThumbnail: await reSize(buffer, 200, 200) }, buttons: button, footer:  botname, mentions: [m.sender] })
