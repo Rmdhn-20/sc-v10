@@ -1744,7 +1744,7 @@ zets.sendMessage(m.chat, buttonMessage, { quoted: m })
 break
 case 'meme': case 'memes': {
 let buttons = [
-{buttonId: `coffe`, buttonText: {displayText: 'Next Image'}, type: 1}
+{buttonId: `meme`, buttonText: {displayText: 'Next Image'}, type: 1}
 ]
 let buttonMessage = {
 image: { url: 'https://leyscoders-api.herokuapp.com/api/memeindo?apikey=dappakntlll' },
@@ -2214,10 +2214,10 @@ break
 if (!text) return m.reply(`Example : ${prefix +command} type username\n\nList Type :\n1. ig (Instagram)\n2. github (username)\n3. tiktok (username)\n4. twitter (username)`)
 let [type, id, zone] = args
 if (type.toLowerCase() == 'ig') {
-if (!id) throw `No Query username, Example : ${prefix + command} ig cak_haho`
-let { result: anu } = await fetchJson(`https://api.xteam.xyz/dl/igstalk?nama=${id}&APIKEY=33a708cfa36fe5ba`)
-if (anu.status == false) return m.reply(anu.result.message)
-zets.sendMedia(m.chat, anu.profile_pic_url, '', `⌕ Full Name : ${anu.full_name}\n⌕ User Name : ${anu.username}\n⌕ ID ${anu.id}\n⌕ Followers : ${anu.edge_follow.count}\n⌕ Following : ${anu.edge_followed_by.count}\n⌕ Private : ${anu.is_private}\n⌕ Bio : ${anu.biography}`, m)
+if (!id) throw `No Query username, Example : ${prefix + command} ig ekuzikaa_18`
+let { result: anu } = await fetchJson(`https://api-xcoders.xyz/api/stalk/ig?username=${id}&apikey=cyXNcMnw3x`)
+if (anu.status == false) return m.reply(anu.result)
+zets.sendMedia(m.chat, anu.profile_url, '', `⌕ Full Name : ${anu.fullname}\n⌕ User Name : ${anu.username}\n⌕ Followers : ${anu.followers}\n⌕ Following : ${anu.following}\n⌕ Private : ${anu.is_private}\n⌕ Bio : ${anu.biography}\n⌕ Posted : ${anu.post_count}`, m)
 		db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'github') {
 if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20`
@@ -2228,14 +2228,10 @@ m.reply(`⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.u
 } else if (type.toLowerCase() == 'tiktok') {
 if (!id) throw `No Query username, Example : ${prefix + command} tiktok exzuka_81`
 m.reply(mess.wait)
-stalkuy.user(q)
+stalkuy.user(id)
 .then(User => {
 	console.log(User)
 	zets.sendMedia(m.chat, User.avatar, '', `⌕ *Username:* ${User.uniqueId}\n⌕ *Nickname:* ${User.nickname}\n⌕ *Followers:* ${User.followers}\n⌕ *Following:* ${User.following}\n⌕ *Verified:* ${User.verified}\n⌕ *Private:* ${User.privateAccount}\n⌕ *Total Likes:* ${User.hearts}\n⌕ *Total Videos:* ${User.videos}\n⌕ *Created At:* ${User.createdAt}\n⌕ *Bio:* ${User.signature}\n⌕ *Bio Url:* ${User.bioLink}`, m)
-	.catch(err => {
-	console.log(err)
-	m.reply(err.message)
-		})
 	})
 	db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'twitter') {
@@ -2243,7 +2239,8 @@ if (!id) throw `No Query username, Example : ${prefix + command} twitter cnnindo
 m.reply(mess.wait)
 let restapinye = await fetchJson(`https://api-xcoders.xyz/api/stalk/twitter?username=${id}&apikey=cyXNcMnw3x`)
 let resultnye = restapinye.result
-zets.sendMedia(m.chat, resultnye.profile, '', `⌕ *Username:* ${resultnye.username}\n⌕ *Fullname:* ${resultnye.nickname}\n⌕ *Biography:* ${resultnye.biography}\n⌕ *Followers:* ${resultnye.followers}\n⌕ *Following:* ${resultnye.following}\n⌕ *Created At:* ${resultnye.join_at}\n`, m)
+zets.sendMedia(m.chat, resultnye.profile, '', `⌕ *Username:* ${resultnye.username}\n⌕ *Fullname:* ${resultnye.nickname}\n⌕ *Biography:* ${resultnye.biography}\n⌕ *Followers:* ${resultnye.followers}\n⌕ *Following:* ${resultnye.following}\n`, m)
+db.data.users[m.sender].limit -= 1
 } else {
 m.reply(`Example : ${prefix +command} type username\n\nList Type :\n1. ig (Instagram)\n2. github (username)\n3. tiktok (username)\n4. twitter (username)`)
 }
@@ -2858,7 +2855,7 @@ anu = `Hai kak, have a nice day:)
 
 ♕︎ *YOUR INFORMATION*
 ✔︎ *Name :* _${pushname}_
-✔︎ *WhatsApp :* _wa.me/${sender}_
+✔︎ *WhatsApp :* ${sender}
 ✔︎ *Bio :* ${bio.status}
 
 ♕︎ *Main*
