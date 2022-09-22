@@ -24,6 +24,8 @@ const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { TTScraper } = require('tiktok-scraper-ts')
 const stalkuy = new TTScraper()
+const { igApi } = require('insta-fetcher')
+const insta = new igApi('40194017622%3AaRqzskOBlc8KpX%3A24')
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 
 //Apikey
@@ -2215,11 +2217,11 @@ if (!text) return m.reply(`Example : ${prefix +command} type username\n\nList Ty
 let [type, id, zone] = args
 if (type.toLowerCase() == 'ig') {
 if (!id) throw `No Query username, Example : ${prefix + command} ig ekuzikaa_18`
-let anu = await fetchJson(`https://api-xcoders.xyz/api/stalk/ig?username=${id}&apikey=cyXNcMnw3x`)
-if (anu.status == false) return m.reply(anu.status)
-m.reply(mess.wait)
-zets.sendMedia(m.chat, anu.result.profile_url, '', `⌕ Full Name : ${anu.result.fullname}\n⌕ User Name : ${anu.result.username}\n⌕ Followers : ${anu.result.followers}\n⌕ Following : ${anu.result.following}\n⌕ Private : ${anu.result.is_private}\n⌕ Bio : ${anu.result.biography}\n⌕ Posted : ${anu.result.post_count}`, m)
-		db.data.users[m.sender].limit -= 1
+insta.fetchUser(q)
+	.then(async(result) => {
+	zets.sendMedia(m.chat, result.hd_profile_pic_url_info.url, '', `*- Username:* ${result.username}\n*- Fullname:* ${result.fullname}\n*- Followers:* ${result.followers} Followers\n*- Following:* ${result.following} Following\n*- Verified:* ${result.is_verified}\n*- Private:* ${result.is_private}\n*- Bio:* ${result.biography}\n*- External Url:* ${result.external_url}\n*- Url Account:* https://instagram.com/${q}`, m)
+	})
+	db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'github') {
 if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20`
 let anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/github?q=${id}&apikey=dappakntlll`)
