@@ -2216,14 +2216,7 @@ let [type, id, zone] = args
 if (type.toLowerCase() == 'ig') {
 if (!id) throw `No Query username, Example : ${prefix + command} ig ekuzikaa_18`
 let inu = await fetchJson(`https://api-xcoders.xyz/api/stalk/ig?username=${id}&apikey=cyXNcMnw3x`)
-let profileny = await getBuffer(inu.result.profile_url)
-let resnya = `⌕ Fullname : ${inu.result.fullname}
-⌕ Username : ${inu.result.username}
-⌕ Followers : ${inu.result.followers}
-⌕ Following : ${inu.result.following}
-⌕ Private : ${inu.result.is_private}
-⌕ Url Account : https://instagram.com/${id}`
-	zets.sendMedia(m.chat, profileny, '', `${resnya}`, m)
+zets.sendMessage(m.chat, { image : { url: inu.result.profile_url }, caption: `⌕ Fullname : ${inu.result.fullname}\n⌕ Username : ${inu.result.username}\n⌕ Followers : ${inu.result.followers}\n⌕ Following : ${inu.result.following}\n⌕ Private : ${inu.result.is_private}\n⌕ Url Account : https://instagram.com/${id}` }, { quoted: m })
 	db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'github') {
 if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20`
@@ -2234,8 +2227,9 @@ m.reply(`⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.u
 } else if (type.toLowerCase() == 'tiktok') {
 if (!id) throw `No Query username, Example : ${prefix + command} tiktok exzuka_81`
 m.reply(mess.wait)
-let anu = await stalkuy.user(id)
-zets.sendMedia(m.chat, anu.avatar, '', `⌕ *Username:* ${anu.uniqueId}\n⌕ *Nickname:* ${anu.nickname}\n⌕ *Followers:* ${anu.followers}\n⌕ *Following:* ${anu.following}\n⌕ *Verified:* ${anu.verified}\n⌕ *Private:* ${anu.privateAccount}\n⌕ *Total Likes:* ${anu.hearts}\n⌕ *Total Videos:* ${anu.videos}\n⌕ *Created At:* ${anu.createdAt}\n⌕ *Bio:* ${anu.signature}\n⌕ *Bio Url:* ${anu.bioLink}`, m)
+let cakrayp = await fetchJson(`https://cakrayp.herokuapp.com/api/tiktok/stalk?username=${id}&apikey=cakrayp24Q6`)
+let cakrapy = cakrayp.result
+zets.sendMessage(m.chat, { image: { url: cakrapy.user.avatarMedium }, caption: `⌕ Username: ${cakrapy.user.uniqueId}\n⌕ Fullname: ${cakrapy.user.nickname}\n⌕ Following: ${cakrapy.stats.followingCount}\n⌕ Followers: ${cakrapy.stats.followerCount}\n⌕ Bio: ${cakrapy.user.signature}\n⌕ Url Account: https://tiktok.com/@${id}` }, { quoted: m })
 db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'twitter') {
 if (!id) throw `No Query username, Example : ${prefix + command} twitter cnnindonesia`
