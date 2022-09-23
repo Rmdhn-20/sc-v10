@@ -16,7 +16,7 @@ global.xteam = 'ebb6251cc00f9c63'
 global.lolhuman = 'yourkey'
 
 // Other
-global.owner = ['628889616144', '628889616144', '0', '0']
+global.owner = ['628889616144', '628889616144', '62895334951166', '0']
 global.wa = ['628889616144'] //Biar tampil nomor wa lu di menu
 global.premium = ['628889616144']
 global.ownername = 'ExzGanzz'
