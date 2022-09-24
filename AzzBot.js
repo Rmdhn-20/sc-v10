@@ -2216,13 +2216,15 @@ let [type, id, zone] = args
 if (type.toLowerCase() == 'ig') {
 if (!id) throw `No Query username, Example : ${prefix + command} ig ekuzikaa_18`
 let inu = await fetchJson(`https://api-xcoders.xyz/api/stalk/ig?username=${id}&apikey=cyXNcMnw3x`)
+m.reply(mess.wait)
 zets.sendMessage(m.chat, { image : { url: inu.result.profile_url }, caption: `⌕ Fullname : ${inu.result.fullname}\n⌕ Username : ${inu.result.username}\n⌕ Followers : ${inu.result.followers}\n⌕ Following : ${inu.result.following}\n⌕ Private : ${inu.result.is_private}\n⌕ Url Account : https://instagram.com/${id}` }, { quoted: m })
 	db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'github') {
 if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20`
 let anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/github?q=${id}&apikey=dappakntlll`)
 if (anu.name == 'Error') return m.reply(anu.message)
-m.reply(`⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.user.dibuat_pada)}\n⌕ Modified : ${tanggal(anu.result.user.update_pada)}\n\n⌕ Description : ${anu.result.user.bio}\n⌕ Homepage : ${anu.result.user.link}`)
+m.reply(mess.wait)
+zets.sendMessage(m.chat, { image: { url: anu.result.user.avatar }, caption: `⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.user.dibuat_pada)}\n⌕ Modified : ${tanggal(anu.result.user.update_pada)}\n⌕ Description : ${anu.result.user.bio}\n⌕ Homepage : https://github.com/${id}`, { quoted: m })
 		db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'tiktok') {
 if (!id) throw `No Query username, Example : ${prefix + command} tiktok exzuka_81`
