@@ -22,8 +22,6 @@ const speed = require('performance-now')
 const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
-const { TTScraper } = require('tiktok-scraper-ts')
-const stalkuy = new TTScraper()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 
 //Apikey
@@ -2224,7 +2222,7 @@ if (!id) throw `No Query username, Example : ${prefix + command} github Rmdhn-20
 let anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/github?q=${id}&apikey=dappakntlll`)
 if (anu.name == 'Error') return m.reply(anu.message)
 m.reply(mess.wait)
-zets.sendMessage(m.chat, { image: { url: anu.result.user.avatar }, caption: `⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.user.dibuat_pada)}\n⌕ Modified : ${tanggal(anu.result.user.update_pada)}\n⌕ Description : ${anu.result.user.bio}\n⌕ Homepage : https://github.com/${id}`, { quoted: m })
+zets.sendMessage(m.chat, { image: { url: anu.result.user.avatar }, caption: `⌕ Name : ${anu.result.username}\n⌕ Created : ${tanggal(anu.result.user.dibuat_pada)}\n⌕ Modified : ${tanggal(anu.result.user.update_pada)}\n⌕ Description : ${anu.result.user.bio}\n⌕ Homepage : https://github.com/${id}` }, { quoted: m })
 		db.data.users[m.sender].limit -= 1
 } else if (type.toLowerCase() == 'tiktok') {
 if (!id) throw `No Query username, Example : ${prefix + command} tiktok exzuka_81`
