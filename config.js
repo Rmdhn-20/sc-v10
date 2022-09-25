@@ -17,11 +17,10 @@ global.lolhuman = 'yourkey'
 
 // Other
 global.owner = ['628889616144', '628889616144', '0', '0', '0']
-global.wa = ['628889616144'] //Biar tampil nomor wa lu di menu
 global.premium = ['628889616144']
 global.ownername = 'ExzGanzz'
 global.botname = 'ExzBot•MD'
-global.packname = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n By © ExzGanzz'
+global.packname = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n By © ExzGanzz'
 global.gc = 'https://github.com/Rmdhn-20'
 global.linkig = 'https://instagram.com/ekuzikaa_18'
 global.linkgc = 'Gada Cok!'
@@ -31,14 +30,14 @@ global.sessionName = 'sesi'
 global.prefa = ['','!','.','🐦','🐤','🗿']
 global.sp = '⌕'
 global.mess = {
-    success: '❏  ⌈ _Berhasil . . ._  ⌋',
+    success: '❏  ⌈  _Berhasil . . ._  ⌋',
     admin: '*Fitur Khusus Admin Group!*',
     botAdmin: '*Bot Harus Menjadi Admin Terlebih Dahulu!*',
     owner: '*Fitur Khusus Owner Bot*',
     group: '*Fitur Digunakan Hanya Untuk Group!*',
     private: '*Fitur Digunakan Hanya Untuk Private Chat!*',
     bot: '*Fitur Khusus Pengguna Nomor Bot*',
-    wait: '【 ❗ 】 ⌈  *Tunggu sebentar, sedang di proses* ⌋',
+    wait: '【 ❗ 】  ⌈  *Tunggu sebentar, sedang di proses*  ⌋',
     endLimit: '【 ❗ 】 *Limit Harian Anda Telah Habis, Limit Akan Direset Setiap Jam 12*',
 }
 global.limitawal = {
