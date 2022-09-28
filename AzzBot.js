@@ -2384,6 +2384,17 @@ Untuk Download Media Silahkan Klik salah satu Button dibawah ini atau masukkan c
 	}
 	break
 
+//By Ekuzika
+
+case 'tts': {
+if (!text) throw `Example : ${prefix + command} [text] | [kode bahasa]\n${prefix + command} test|en`
+m.reply(mess.wait)
+let [textnyea, kodebhs] = text.split`|`
+let entok = `https://api-xcoders.xyz/api/maker/tts?text=${textnyea}&language=${kodebhs}&apikey=cyXNcMnw3x`
+zets.sendMessage(m.chat, { audio: { url: entok }, mimetype: 'audio/mpeg'}, { quoted: m })
+}
+break
+
 //────────────────────[ ISLAMIC FEATURE ]────────────────────
 
 case 'ringtone': {
@@ -3027,6 +3038,7 @@ anu = `Hai kak, have a nice day:)
 ♕︎ *Convert*
    ⚠︎ ${prefix}toimage
    ⚠︎ ${prefix}ttp
+   ⚠︎ ${prefix}tts
    ⚠︎ ${prefix}removebg
    ⚠︎ ${prefix}emojisticker
    ⚠︎ ${prefix}sticker
